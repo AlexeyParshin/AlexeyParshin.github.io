@@ -20,14 +20,14 @@ webpackEmptyAsyncContext.id = "./src/$$_lazy_route_resource lazy recursive";
 /***/ "./src/app/app.component.css":
 /***/ (function(module, exports) {
 
-module.exports = ".chartz {\r\n  display: inline-block;\r\n  margin: 0 150px  0 150px;\r\n}\r\n\r\n.main {\r\n  margin-top: 150px;\r\n}\r\n\r\n\r\n"
+module.exports = ".chartz {\r\n  display: inline-block;\r\n  margin: 0 120px  0 150px;\r\n}\r\n\r\n.main {\r\n  margin-top: 150px;\r\n}\r\n\r\n"
 
 /***/ }),
 
 /***/ "./src/app/app.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<!--The content below is only a placeholder and can be replaced.-->\n<div class=\"main\">\n<app-charts class=\"chartz\"></app-charts>\n<app-charts class=\"chartz\"></app-charts>\n</div>\n\n"
+module.exports = "<!--The content below is only a placeholder and can be replaced.-->\r\n<link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css\">\r\n<script src=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js\"></script>\r\n<div class=\"main\">\r\n  <app-charts class=\"chartz\"></app-charts>\r\n  <app-charts class=\"chartz\"></app-charts>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -118,14 +118,14 @@ var AppModule = /** @class */ (function () {
 /***/ "./src/app/charts/charts.component.css":
 /***/ (function(module, exports) {
 
-module.exports = ".chart {\r\n  border-radius: 25px;\r\n  border: 20px solid gray;\r\n  height: 300px;\r\n  width: 400px;\r\n}\r\n"
+module.exports = ".well {\r\n  border-radius: 25px;\r\n}\r\n"
 
 /***/ }),
 
 /***/ "./src/app/charts/charts.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div dnd-droppable (onDropSuccess)=\"onDrop($event)\">\n  <div [chart]=\"chart\" class=\"chart\" dnd-draggable\n       [draggable]=\"true\"\n       [dragData]=\"points\">\n  </div>\n</div>\n"
+module.exports = "<div dnd-droppable (onDropSuccess)=\"onDrop($event)\">\r\n  <div [chart]=\"chart\" class=\"well\" dnd-draggable\r\n       [draggable]=\"true\"\r\n       [dragData]=\"points\">\r\n  </div>\r\n</div>\r\n<button type=\"button\" class=\"btn btn-primary btn-sm\" (click)=\"clear()\">clear</button>\r\n<button type=\"button\" class=\"btn btn-primary btn-sm\" (click)=\"newChart()\">new chart</button>\r\n"
 
 /***/ }),
 
@@ -153,6 +153,10 @@ var ChartsComponent = /** @class */ (function () {
     function ChartsComponent(dataService) {
         this.dataService = dataService;
         this.chart = new __WEBPACK_IMPORTED_MODULE_1_angular_highcharts__["a" /* Chart */]({
+            chart: {
+                height: 300,
+                width: 400,
+            },
             xAxis: {
                 allowDecimals: false
             },
@@ -172,11 +176,22 @@ var ChartsComponent = /** @class */ (function () {
             data: $event.dragData
         });
     };
+    ChartsComponent.prototype.newChart = function () {
+        for (var i = this.chart.ref.series.length; i >= 0; i--) {
+            this.chart.removeSerie(i);
+        }
+        this.getSeries();
+    };
     ChartsComponent.prototype.getSeries = function () {
         this.points = this.dataService.getData();
         this.chart.addSerie({
             data: this.points
         });
+    };
+    ChartsComponent.prototype.clear = function () {
+        for (var i = this.chart.ref.series.length; i > 0; i--) {
+            this.chart.removeSerie(i);
+        }
     };
     ChartsComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
@@ -189,12 +204,6 @@ var ChartsComponent = /** @class */ (function () {
     return ChartsComponent;
 }());
 
-/*
-{
-  points: [29.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4]
-}, {
-  points: [144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4, 29.9, 71.5, 106.4, 129.2]
-}*/
 
 
 /***/ }),
