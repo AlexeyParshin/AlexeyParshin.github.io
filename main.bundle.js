@@ -27,7 +27,7 @@ module.exports = ".chartz {\r\n  display: inline-block;\r\n  margin: 0 120px  0 
 /***/ "./src/app/app.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<!--The content below is only a placeholder and can be replaced.-->\r\n<link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css\">\r\n<script src=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js\"></script>\r\n<div class=\"main\">\r\n  <app-charts class=\"chartz\"></app-charts>\r\n  <app-charts class=\"chartz\"></app-charts>\r\n</div>\r\n"
+module.exports = "<!--The content below is only a placeholder and can be replaced.-->\n<link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css\">\n<script src=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js\"></script>\n<div class=\"main\">\n  <app-charts class=\"chartz\"></app-charts>\n  <app-charts class=\"chartz\"></app-charts>\n</div>\n"
 
 /***/ }),
 
@@ -164,6 +164,10 @@ var ChartsComponent = /** @class */ (function () {
                 series: {
                     pointStart: 100
                 }
+            },
+            tooltip: {
+                shared: true,
+                crosshairs: true
             },
             series: []
         });
