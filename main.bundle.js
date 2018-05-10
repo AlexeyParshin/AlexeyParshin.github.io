@@ -176,9 +176,13 @@ var ChartsComponent = /** @class */ (function () {
         this.getSeries();
     };
     ChartsComponent.prototype.onDrop = function ($event) {
-        this.chart.addSerie({
-            data: $event.dragData
-        });
+        if ($event.dragData !== this.points) {
+            console.log('local ' + this.points);
+            console.log('received ' + $event);
+            this.chart.addSerie({
+                data: $event.dragData
+            });
+        }
     };
     ChartsComponent.prototype.newChart = function () {
         for (var i = this.chart.ref.series.length; i >= 0; i--) {
